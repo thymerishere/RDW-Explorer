@@ -4,8 +4,10 @@ from typing import Any
 import requests
 
 from rdw_explorer.config import Config
+from rdw_explorer.property.property import Property
 
 
+@dataclass
 class SodaField:
 
     name: str
@@ -13,7 +15,6 @@ class SodaField:
 
 @dataclass
 class SodaMetadata:
-
 
     fields: list[SodaField]
 
@@ -37,12 +38,21 @@ class SodaConnection:
         return result
 
     @staticmethod
-    def _get_json_from_request(result: requests.Response) -> Any:
+    def _get_soda_fields_from_request(result: requests.Response) -> list[dict[str, str]]:
         assert 'json' in result.headers['content-type']
+        result_json = result.json()
 
-        return result.json()
+        assert isinstance(result_json, list)
 
-    def _get_metadata(self, end_point: str) -> SodaMetadata:
+        return result_json
+
+
+    def query_request(self, url: str) -> list[dict[str, str]]:
+        result = self._request(url)
+        result_json = self._get_soda_fields_from_request(result)
+        return result_json
+
+    def get_metadata(self, end_point: str) -> SodaMetadata:
         query = f"{end_point}?$limit=0"
         request = self._request(query)
 
