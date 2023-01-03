@@ -20,6 +20,15 @@ class Property(ABC, Generic[T]):
     def field(self) -> str:
         """Name of this property as found in the database."""
 
+    def query(self, exact: bool) -> str:
+        """Create a query entry for this property."""
+        if exact:
+            value_str = f"{self.value}"
+        else:
+            value_str = f"%{self.value}%"
+        query = f'{self.field} like "{value_str}"'
+        return query
+
     def __str__(self) -> str:
         return f"{self.name}: {self.value}"
 

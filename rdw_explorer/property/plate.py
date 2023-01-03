@@ -50,3 +50,6 @@ class Plate(Property):
     @property
     def field(self) -> str:
         return self._field
+
+    def query(self, _) -> str:
+        return f'{self.field} like "{self.value}"' 
