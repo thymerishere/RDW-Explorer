@@ -10,14 +10,14 @@ T = TypeVar('T')
 
 class BasicProperty(Property, Generic[T]):
 
-    _name: str
-    _value: T
     _field: str
+    _value: T
+    _name: str
 
-    def __init__(self, name: str, value: T, field: str) -> None:
-        self._name = name
-        self._value = value
+    def __init__(self, field: str, value: T, name: str) -> None:
         self._field = field
+        self._value = value
+        self._name = name
 
     @property
     def name(self) -> str:

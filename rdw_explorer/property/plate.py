@@ -13,9 +13,9 @@ class PlateCharType(Enum):
 
 class Plate(Property):
 
-    _name: str
-    _value: str
     _field: str
+    _value: str
+    _name: str
     format: list[PlateCharType]
 
     @staticmethod
@@ -33,10 +33,10 @@ class Plate(Property):
             types.append(type_)
         return types
 
-    def __init__(self, name: str, value: str, field: str) -> None:
-        self._name = name
-        self._value = value
+    def __init__(self, field: str, value: str, name: str) -> None:
         self._field = field
+        self._value = value
+        self._name = name
         self.format = self._get_format(value)
 
     @property

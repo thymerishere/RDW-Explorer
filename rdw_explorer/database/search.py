@@ -28,7 +28,8 @@ class Search:
     @staticmethod
     def _json_to_vehicle(obj: dict[str, str]) -> Vehicle:
         properties = [property_factory.from_field(field, value) for field, value in obj.items()]
-        vehicle = Vehicle(properties)
+        property_dict = {property.field: property for property in properties}
+        vehicle = Vehicle(property_dict)
         return vehicle
 
     def search(self, vehicle: Vehicle) -> list[Vehicle]:

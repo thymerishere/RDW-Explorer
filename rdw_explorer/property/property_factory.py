@@ -6,6 +6,6 @@ from rdw_explorer.property.property import Property
 
 def from_field(field: str, value: str) -> Property:
     if field == 'kenteken':
-        return Plate('Kenteken', value, field)
+        return Plate(field, value, 'Kenteken')
     return BasicProperty(field, value, field)
 
