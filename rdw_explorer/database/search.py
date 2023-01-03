@@ -4,6 +4,7 @@ from enum import Enum
 from rdw_explorer.config import Config
 from rdw_explorer.database import query_factory
 from rdw_explorer.database.connection import SodaConnection
+from rdw_explorer.property import property_factory
 from rdw_explorer.property.property import Property
 from rdw_explorer.vehicle import Vehicle
 
@@ -26,7 +27,7 @@ class Search:
         
     @staticmethod
     def _json_to_vehicle(obj: dict[str, str]) -> Vehicle:
-        properties = [Property(field, value, field) for field, value in obj.items()]
+        properties = [property_factory.from_field(field, value) for field, value in obj.items()]
         vehicle = Vehicle(properties)
         return vehicle
 
