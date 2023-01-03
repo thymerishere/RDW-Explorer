@@ -65,6 +65,3 @@ class SodaConnection:
         fields = [SodaField(name, type) for name, type in zip(names, types)] 
         
         return SodaMetadata(fields)
-
-
-    
