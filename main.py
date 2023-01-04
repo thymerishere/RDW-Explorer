@@ -1,7 +1,4 @@
 from rdw_explorer import command_line_interface
-from rdw_explorer.config import Config
-from rdw_explorer.database.search import Search
-from rdw_explorer.vehicle import Vehicle
 
 
 def main() -> None:
