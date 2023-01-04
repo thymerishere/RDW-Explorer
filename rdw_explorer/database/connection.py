@@ -30,6 +30,7 @@ class SodaConnection:
     
     @staticmethod
     def _request(url: str):
+        print('Requesting: ', url)
         result = requests.get(url)
         
         if result.status_code != 200:
