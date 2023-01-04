@@ -15,7 +15,7 @@ class SearchResult:
     vehicles: pd.DataFrame = field(default_factory=lambda: pd.DataFrame())
 
     def union(self, other: 'SearchResult') -> 'SearchResult':
-        if not self.vehicles or other.vehicles:
+        if self.vehicles.empty or other.vehicles.empty:
             return SearchResult()
 
         vehicles = pd.merge(
@@ -32,6 +32,12 @@ class SearchResult:
     def from_json(obj: list[dict[str, str]]) -> 'SearchResult':
         search_result = SearchResult(pd.DataFrame(obj))
         return search_result
+
+    def __str__(self) -> str:
+        if self.vehicles.empty:
+            return "SearchResult(Empty)"
+
+        return str(self.vehicles[['kenteken', 'merk', 'handelsbenaming', 'eerste_kleur']])
 
 
 class Search:
